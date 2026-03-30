@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/mini_tensorrt.dir/src/main.cpp.o CMakeFiles/mini_tensorrt.dir/src/ir.cpp.o -o mini_tensorrt  /usr/lib/x86_64-linux-gnu/libprotobuf.so 
