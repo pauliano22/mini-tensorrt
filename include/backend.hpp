@@ -16,7 +16,10 @@ namespace minitrt {
         // The Kernels
         void execute_relu(std::shared_ptr<Node> node);
         void execute_conv2d(std::shared_ptr<Node> node);
-        void execute_conv_relu(std::shared_ptr<Node> node); // ADD THIS LINE
+        void execute_conv_relu(std::shared_ptr<Node> node);
+        void execute_maxpool(std::shared_ptr<Node> node);
+        void execute_reshape(std::shared_ptr<Node> node);
+        void execute_gemm(std::shared_ptr<Node> node);
     };
 
 }

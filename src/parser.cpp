@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include <iostream>
 #include <fstream>
+#include <cstring> // Required for std::memcpy
 
 namespace minitrt {
 
@@ -56,15 +57,32 @@ namespace minitrt {
     }
 
     void ONNXParser::parse_tensor(const onnx::TensorProto& onnx_tensor, std::shared_ptr<Graph> graph) {
-        // Extract the shape (dimensions) of the tensor
+        // 1. Extract the shape
         std::vector<int64_t> shape;
         for (int i = 0; i < onnx_tensor.dims_size(); ++i) {
             shape.push_back(onnx_tensor.dims(i));
         }
 
-        // Create our custom Tensor object
+        // 2. Create our custom Tensor object
         auto tensor = std::make_shared<Tensor>(onnx_tensor.name(), shape);
         
+        // 3. EXTRACT THE REAL WEIGHTS!
+        // Check if the protobuf actually contains raw binary data (Proto3 style)
+        if (!onnx_tensor.raw_data().empty()) {
+            const std::string& raw_data = onnx_tensor.raw_data();
+            
+            // Calculate how many floats we expect to find (Total Bytes / 4 bytes per float)
+            size_t num_floats = raw_data.size() / sizeof(float);
+            
+            // Allocate the exact amount of memory needed in our tensor
+            tensor->data.resize(num_floats);
+            
+            // The Magic: Copy the raw bytes directly into our floating-point array
+            std::memcpy(tensor->data.data(), raw_data.data(), raw_data.size());
+            
+            std::cout << "  [Parser] Loaded " << num_floats << " trained weights for " << tensor->name << "\n";
+        }
+
         // Add it to our Graph's memory
         graph->add_tensor(tensor);
     }
