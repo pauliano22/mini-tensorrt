@@ -28,6 +28,15 @@ namespace minitrt {
 
         // Utility to print tensor info for debugging
         void print() const;
+
+        size_t elements() const {
+            if (shape.empty()) return 0;
+            size_t total = 1;
+            for (auto dim : shape) {
+                total *= dim;
+            }
+            return total;
+        }
     };
 
     // ==========================================
@@ -66,6 +75,12 @@ namespace minitrt {
     public:
         std::string model_name;
         
+        // Look up a tensor by name, or create a blank one if it doesn't exist
+        std::shared_ptr<Tensor> get_or_create_tensor(const std::string& name);
+
+        // Fast lookup table
+        std::unordered_map<std::string, std::shared_ptr<Tensor>> tensor_map;
+
         // Master lists holding all operations and data buffers in memory
         std::vector<std::shared_ptr<Node>> nodes;
         std::vector<std::shared_ptr<Tensor>> tensors;

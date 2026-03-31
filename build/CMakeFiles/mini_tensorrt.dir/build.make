@@ -97,20 +97,84 @@ CMakeFiles/mini_tensorrt.dir/src/ir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mini_tensorrt.dir/src/ir.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paul22iac/mini-tensorrt/src/ir.cpp -o CMakeFiles/mini_tensorrt.dir/src/ir.cpp.s
 
+CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o: CMakeFiles/mini_tensorrt.dir/flags.make
+CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o: ../src/parser.cpp
+CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o: CMakeFiles/mini_tensorrt.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paul22iac/mini-tensorrt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o -MF CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o.d -o CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o -c /home/paul22iac/mini-tensorrt/src/parser.cpp
+
+CMakeFiles/mini_tensorrt.dir/src/parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mini_tensorrt.dir/src/parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paul22iac/mini-tensorrt/src/parser.cpp > CMakeFiles/mini_tensorrt.dir/src/parser.cpp.i
+
+CMakeFiles/mini_tensorrt.dir/src/parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mini_tensorrt.dir/src/parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paul22iac/mini-tensorrt/src/parser.cpp -o CMakeFiles/mini_tensorrt.dir/src/parser.cpp.s
+
+CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o: CMakeFiles/mini_tensorrt.dir/flags.make
+CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o: ../src/optimizer.cpp
+CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o: CMakeFiles/mini_tensorrt.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paul22iac/mini-tensorrt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o -MF CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o.d -o CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o -c /home/paul22iac/mini-tensorrt/src/optimizer.cpp
+
+CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paul22iac/mini-tensorrt/src/optimizer.cpp > CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.i
+
+CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paul22iac/mini-tensorrt/src/optimizer.cpp -o CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.s
+
+CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o: CMakeFiles/mini_tensorrt.dir/flags.make
+CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o: ../src/backend.cpp
+CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o: CMakeFiles/mini_tensorrt.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paul22iac/mini-tensorrt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o -MF CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o.d -o CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o -c /home/paul22iac/mini-tensorrt/src/backend.cpp
+
+CMakeFiles/mini_tensorrt.dir/src/backend.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mini_tensorrt.dir/src/backend.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paul22iac/mini-tensorrt/src/backend.cpp > CMakeFiles/mini_tensorrt.dir/src/backend.cpp.i
+
+CMakeFiles/mini_tensorrt.dir/src/backend.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mini_tensorrt.dir/src/backend.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paul22iac/mini-tensorrt/src/backend.cpp -o CMakeFiles/mini_tensorrt.dir/src/backend.cpp.s
+
+CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o: CMakeFiles/mini_tensorrt.dir/flags.make
+CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o: ../src/onnx.pb.cc
+CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o: CMakeFiles/mini_tensorrt.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paul22iac/mini-tensorrt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o -MF CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o.d -o CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o -c /home/paul22iac/mini-tensorrt/src/onnx.pb.cc
+
+CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paul22iac/mini-tensorrt/src/onnx.pb.cc > CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.i
+
+CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paul22iac/mini-tensorrt/src/onnx.pb.cc -o CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.s
+
 # Object files for target mini_tensorrt
 mini_tensorrt_OBJECTS = \
 "CMakeFiles/mini_tensorrt.dir/src/main.cpp.o" \
-"CMakeFiles/mini_tensorrt.dir/src/ir.cpp.o"
+"CMakeFiles/mini_tensorrt.dir/src/ir.cpp.o" \
+"CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o" \
+"CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o" \
+"CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o" \
+"CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o"
 
 # External object files for target mini_tensorrt
 mini_tensorrt_EXTERNAL_OBJECTS =
 
 mini_tensorrt: CMakeFiles/mini_tensorrt.dir/src/main.cpp.o
 mini_tensorrt: CMakeFiles/mini_tensorrt.dir/src/ir.cpp.o
+mini_tensorrt: CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o
+mini_tensorrt: CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o
+mini_tensorrt: CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o
+mini_tensorrt: CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o
 mini_tensorrt: CMakeFiles/mini_tensorrt.dir/build.make
 mini_tensorrt: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 mini_tensorrt: CMakeFiles/mini_tensorrt.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/paul22iac/mini-tensorrt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable mini_tensorrt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/paul22iac/mini-tensorrt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable mini_tensorrt"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mini_tensorrt.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

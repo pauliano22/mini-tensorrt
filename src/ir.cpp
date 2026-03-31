@@ -67,6 +67,20 @@ namespace minitrt {
 
     void Graph::add_tensor(std::shared_ptr<Tensor> tensor) {
         tensors.push_back(tensor);
+        tensor_map[tensor->name] = tensor; // Add to our fast lookup table
+    }
+    
+    std::shared_ptr<Tensor> Graph::get_or_create_tensor(const std::string& name) {
+        // If we already loaded this tensor (like a weight matrix), return the pointer
+        if (tensor_map.find(name) != tensor_map.end()) {
+            return tensor_map[name];
+        }
+        
+        // Otherwise, this is an intermediate memory buffer. Create a blank one.
+        // We will calculate its exact shape later during a shape-inference pass.
+        auto blank_tensor = std::make_shared<Tensor>(name, std::vector<int64_t>{});
+        add_tensor(blank_tensor);
+        return blank_tensor;
     }
 
     void Graph::print_summary() const {

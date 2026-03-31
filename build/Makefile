@@ -129,6 +129,30 @@ mini_tensorrt/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/build
 .PHONY : mini_tensorrt/fast
 
+src/backend.o: src/backend.cpp.o
+.PHONY : src/backend.o
+
+# target to build an object file
+src/backend.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/backend.cpp.o
+.PHONY : src/backend.cpp.o
+
+src/backend.i: src/backend.cpp.i
+.PHONY : src/backend.i
+
+# target to preprocess a source file
+src/backend.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/backend.cpp.i
+.PHONY : src/backend.cpp.i
+
+src/backend.s: src/backend.cpp.s
+.PHONY : src/backend.s
+
+# target to generate assembly for a file
+src/backend.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/backend.cpp.s
+.PHONY : src/backend.cpp.s
+
 src/ir.o: src/ir.cpp.o
 .PHONY : src/ir.o
 
@@ -177,6 +201,78 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/onnx.pb.o: src/onnx.pb.cc.o
+.PHONY : src/onnx.pb.o
+
+# target to build an object file
+src/onnx.pb.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.o
+.PHONY : src/onnx.pb.cc.o
+
+src/onnx.pb.i: src/onnx.pb.cc.i
+.PHONY : src/onnx.pb.i
+
+# target to preprocess a source file
+src/onnx.pb.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.i
+.PHONY : src/onnx.pb.cc.i
+
+src/onnx.pb.s: src/onnx.pb.cc.s
+.PHONY : src/onnx.pb.s
+
+# target to generate assembly for a file
+src/onnx.pb.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/onnx.pb.cc.s
+.PHONY : src/onnx.pb.cc.s
+
+src/optimizer.o: src/optimizer.cpp.o
+.PHONY : src/optimizer.o
+
+# target to build an object file
+src/optimizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.o
+.PHONY : src/optimizer.cpp.o
+
+src/optimizer.i: src/optimizer.cpp.i
+.PHONY : src/optimizer.i
+
+# target to preprocess a source file
+src/optimizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.i
+.PHONY : src/optimizer.cpp.i
+
+src/optimizer.s: src/optimizer.cpp.s
+.PHONY : src/optimizer.s
+
+# target to generate assembly for a file
+src/optimizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/optimizer.cpp.s
+.PHONY : src/optimizer.cpp.s
+
+src/parser.o: src/parser.cpp.o
+.PHONY : src/parser.o
+
+# target to build an object file
+src/parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/parser.cpp.o
+.PHONY : src/parser.cpp.o
+
+src/parser.i: src/parser.cpp.i
+.PHONY : src/parser.i
+
+# target to preprocess a source file
+src/parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/parser.cpp.i
+.PHONY : src/parser.cpp.i
+
+src/parser.s: src/parser.cpp.s
+.PHONY : src/parser.s
+
+# target to generate assembly for a file
+src/parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_tensorrt.dir/build.make CMakeFiles/mini_tensorrt.dir/src/parser.cpp.s
+.PHONY : src/parser.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +282,24 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... mini_tensorrt"
+	@echo "... src/backend.o"
+	@echo "... src/backend.i"
+	@echo "... src/backend.s"
 	@echo "... src/ir.o"
 	@echo "... src/ir.i"
 	@echo "... src/ir.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/onnx.pb.o"
+	@echo "... src/onnx.pb.i"
+	@echo "... src/onnx.pb.s"
+	@echo "... src/optimizer.o"
+	@echo "... src/optimizer.i"
+	@echo "... src/optimizer.s"
+	@echo "... src/parser.o"
+	@echo "... src/parser.i"
+	@echo "... src/parser.s"
 .PHONY : help
 
 

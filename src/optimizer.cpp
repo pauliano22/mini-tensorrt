@@ -3,29 +3,33 @@
 
 namespace minitrt {
 
-    Optimizer::Optimizer(std::shared_ptr<Graph> graph) : target_graph(graph) {}
-
-    void Optimizer::optimize() {
-        std::cout << "[Optimizer] Starting optimization passes...\n";
-        pass_constant_folding();
-        pass_operator_fusion();
-        pass_dead_code_elimination();
-        std::cout << "[Optimizer] Graph optimized.\n";
+    void Optimizer::run_passes(std::shared_ptr<Graph> graph) {
+        std::cout << "[Optimizer] Running Graph Optimization Passes...\n";
+        fuse_conv_relu(graph);
     }
 
-    void Optimizer::pass_constant_folding() {
-        // TODO: Iterate through target_graph->nodes
-        // If a node's inputs are all constant tensors (weights), compute 
-        // the result now, create a new constant tensor, and delete the node.
-    }
+    void Optimizer::fuse_conv_relu(std::shared_ptr<Graph> graph) {
+        for (size_t i = 0; i < graph->nodes.size(); ++i) {
+            // Safety check for look-ahead
+            if (i + 1 >= graph->nodes.size()) break;
 
-    void Optimizer::pass_operator_fusion() {
-        // TODO: Look for patterns like Node A (Conv) -> Node B (ReLU).
-        // Replace with Node C (ConvReLU) and rewire the input/output pointers.
-    }
+            auto current = graph->nodes[i];
+            auto next = graph->nodes[i+1];
 
-    void Optimizer::pass_dead_code_elimination() {
-        // TODO: Remove nodes whose outputs are never read by another node.
-    }
+            if (current->op_type == "Conv" && next->op_type == "Relu") {
+                std::cout << "[Optimizer] Found pattern: Conv -> Relu. Fusing into 'ConvRelu'...\n";
+                
+                current->op_type = "ConvRelu";
+                current->name = "fused_" + current->name;
 
-} // namespace minitrt
+                // Re-link the Conv node's output to the Relu node's output
+                current->outputs = next->outputs;
+
+                // Remove the Relu node
+                graph->nodes.erase(graph->nodes.begin() + i + 1);
+                
+                std::cout << "[Optimizer] Fusion successful.\n";
+            }
+        }
+    }
+}
