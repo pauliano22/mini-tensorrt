@@ -1,63 +1,46 @@
-# Mini-TensorRT: Deep Learning Graph Compiler
+# Mini-TensorRT
 
-## Overview
-Mini-TensorRT is a custom, from-scratch deep learning graph compiler written in C++. It is designed to parse ONNX computational graphs, lower them into an optimized Intermediate Representation (IR), apply graph-level optimizations (like operator fusion and constant folding), and execute the network via a custom backend engine.
+**A zero-dependency, optimizing deep learning inference engine written from scratch in C++.**
 
-## Project Architecture & Work Division
+Mini-TensorRT is a custom inference compiler built to explore machine learning systems and hardware-software co-design. It ingests standard ONNX models, builds an Intermediate Representation (IR) graph, applies compiler optimizations to reduce memory bottlenecks, and executes operations using custom C++ math kernels.
 
-To facilitate parallel development, the architecture is decoupled into two primary domains:
+![Computational Graph Overview](images/netron_graph.png)
+*Visualizing the ingested ONNX topology prior to operator fusion.*
 
-### 1. Frontend & Infrastructure (Graph Parsing & IR)
-* **Goal:** Ingest binary model files and construct the in-memory graph.
-* **Responsibilities:** Protocol Buffer integration, ONNX deserialization, memory management for tensors, and graph topology construction.
+## Core Architecture
 
-### 2. Middle-end & Backend (Optimization & Execution)
-* **Goal:** Rewrite the graph for performance and execute the math.
-* **Responsibilities:** Graph traversal passes (fusion, folding), memory bandwidth optimization, and the execution engine (CPU/AVX/BLAS).
+This engine operates independently of large frameworks like PyTorch or OpenCV, relying only on standard C++17 and Google's Protocol Buffers.
 
-## Development Roadmap (The Gameplan)
+* **Frontend Parser:** A custom deserializer that reads binary ONNX files to extract static shapes, topologies, and raw floating-point weights into memory.
+* **Intermediate Representation (IR):** Custom `Tensor` and `Graph` classes that handle NCHW multidimensional data and track execution dependencies.
+* **Optimizing Compiler:** A graph-traversal pass that mutates the execution plan. It currently implements operator fusion (e.g., merging `Conv` and `ReLU` nodes) to keep data in CPU registers and reduce DRAM round-trips.
+* **Backend Engine:** A dynamic execution engine that reads tensor shapes on the fly (dynamic shape inference) and routes data through custom C++ math kernels.
 
-This project is being developed in four distinct phases to ensure modularity and stability:
+## Supported Operators
 
-* **Phase 1: The Test Oracle (Python)**
-  * Write a lightweight PyTorch script to export a simple, untrained neural network as an `.onnx` file to serve as the compiler's test input.
-* **Phase 2: The Parser (C++ & Protobuf)**
-  * Implement the frontend logic to unpack the binary ONNX file, extracting multidimensional tensor arrays and node operations into the custom C++ IR.
-* **Phase 3: The Naive Backend (C++ Math Kernels)**
-  * Implement pure C++ mathematical kernels for core deep learning operators (Conv2D, MatMul, ReLU, MaxPool) and wire them to the execution engine.
-* **Phase 4: The Optimizer (Graph Traversal)**
-  * Develop the middle-end passes to crawl the IR and mutate the graph for performance (e.g., identifying a `Conv` node feeding into a `ReLU` node and replacing them with a single fused `ConvReLU` block).
+The backend currently supports the operations required to run a complete CNN (like LeNet):
+* `Conv` (Spatial Convolution with dynamic stride/padding)
+* `Relu` (Non-linear Activation)
+* `ConvRelu` (Fused Super-Kernel)
+* `MaxPool` (Spatial Downsampling)
+* `Reshape` (Zero-math memory flattening)
+* `Gemm` (General Matrix Multiplication / Linear Layers)
 
-## Metrics & Visualization Goals
+## End-to-End Execution
 
-Once the compiler is fully functional, this section will be updated with hard engineering metrics:
-* **Netron Topology Maps:** "Before and After" visuals of the `.onnx` graph to prove the operator fusion passes successfully reduced the node count.
-* **Inference Benchmarking:** Charts detailing execution latency vs. batch size, demonstrating the memory-bandwidth savings of the fused operators.
-* **Kernel Profiling:** A breakdown (using `std::chrono`) of the execution time spent inside individual mathematical operations.
+The engine handles full image preprocessing and inference. Below is the terminal output of the engine parsing a trained MNIST classifier, applying operator fusion, and identifying a handwritten digit from a raw `.png` file.
 
-## File Manifest & Directory Structure
+![Terminal Output of Engine Execution](images/guess_number.png)
 
-```text
-mini-tensorrt/
-├── CMakeLists.txt         # Build system configuration, links Protobuf and source files.
-├── README.md              # Project documentation and roadmap.
-├── .gitignore             # Ignores /build directory and .onnx binaries.
-│
-├── include/               # Public C++ headers (Declarations)
-│   ├── ir.hpp             # Defines the `Graph`, `Node`, and `Tensor` memory structures.
-│   ├── parser.hpp         # Defines the `ONNXParser` class for reading the .onnx file.
-│   ├── optimizer.hpp      # Defines graph transformation passes (fusion, constant folding).
-│   └── backend.hpp        # Defines the execution engine interface and hardware mappings.
-│
-├── src/                   # C++ source code (Implementations)
-│   ├── main.cpp           # Entry point: handles CLI args, initializes parser, and triggers execution.
-│   ├── ir.cpp             # Implements graph traversal, node connection, and tensor memory allocation.
-│   ├── parser.cpp         # Implements the Protobuf decoding logic to populate the IR.
-│   ├── optimizer.cpp      # Implements the logic to merge or pre-compute specific IR nodes.
-│   └── backend.cpp        # Implements the actual math operations (e.g., Matrix Multiplication, ReLU).
-│
-├── models/                # Directory for storing test models
-│   └── dummy_model.onnx   # A simple exported model for initial testing.
-│
-└── scripts/               # Python utility scripts
-    └── export_onnx.py     # Script to generate `.onnx` files for the C++ engine to ingest.
+## Building and Running
+
+**Dependencies:**
+* CMake (>= 3.10)
+* Make
+* Protocol Buffers (`libprotobuf-dev`, `protobuf-compiler`)
+
+**Build Instructions:**
+```bash
+mkdir build && cd build
+cmake ..
+make
