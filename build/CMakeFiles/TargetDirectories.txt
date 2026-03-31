@@ -1,3 +1,0 @@
-/home/paul22iac/mini-tensorrt/build/CMakeFiles/mini_tensorrt.dir
-/home/paul22iac/mini-tensorrt/build/CMakeFiles/edit_cache.dir
-/home/paul22iac/mini-tensorrt/build/CMakeFiles/rebuild_cache.dir
