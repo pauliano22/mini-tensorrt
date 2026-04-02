@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(MiniTensorRT CXX)
+project(MiniTensorRT CXX CUDA)
 
 # Require modern C++
 set(CMAKE_CXX_STANDARD 17)
@@ -18,7 +18,7 @@ add_executable(mini_tensorrt
     src/ir.cpp 
     src/parser.cpp 
     src/optimizer.cpp
-    src/backend.cpp   
+    src/backend.cu   
     src/onnx.pb.cc
 )
 
