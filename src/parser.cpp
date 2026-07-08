@@ -70,17 +70,51 @@ namespace minitrt {
         // Check if the protobuf actually contains raw binary data (Proto3 style)
         if (!onnx_tensor.raw_data().empty()) {
             const std::string& raw_data = onnx_tensor.raw_data();
-            
+
             // Calculate how many floats we expect to find (Total Bytes / 4 bytes per float)
             size_t num_floats = raw_data.size() / sizeof(float);
-            
+
             // Allocate the exact amount of memory needed in our tensor
             tensor->data.resize(num_floats);
-            
+
             // The Magic: Copy the raw bytes directly into our floating-point array
             std::memcpy(tensor->data.data(), raw_data.data(), raw_data.size());
-            
+
             std::cout << "  [Parser] Loaded " << num_floats << " trained weights for " << tensor->name << "\n";
+        }
+        // Large tensors can live OUTSIDE the .onnx file: the protobuf then only
+        // stores a file name, byte offset, and length pointing into a sidecar
+        // file (e.g. mnist_cnn.onnx.data). Read those bytes ourselves.
+        else if (onnx_tensor.data_location() == onnx::TensorProto::EXTERNAL) {
+            std::string location;
+            long long offset = 0, length = -1;
+            for (const auto& kv : onnx_tensor.external_data()) {
+                if      (kv.key() == "location") location = kv.value();
+                else if (kv.key() == "offset")   offset = std::stoll(kv.value());
+                else if (kv.key() == "length")   length = std::stoll(kv.value());
+            }
+
+            // The location is relative to the directory holding the .onnx file
+            size_t slash = model_path.find_last_of("/\\");
+            std::string dir = (slash == std::string::npos) ? "" : model_path.substr(0, slash + 1);
+
+            std::ifstream ext(dir + location, std::ios::binary);
+            if (!ext.is_open()) {
+                std::cerr << "  [Error] Missing external data file: " << dir + location << "\n";
+            } else {
+                ext.seekg(offset, std::ios::beg);
+                if (length < 0) {
+                    // No explicit length: infer it from the tensor's declared shape
+                    length = (long long)(tensor->elements() * sizeof(float));
+                }
+
+                size_t num_floats = length / sizeof(float);
+                tensor->data.resize(num_floats);
+                ext.read(reinterpret_cast<char*>(tensor->data.data()), length);
+
+                std::cout << "  [Parser] Loaded " << num_floats << " trained weights for "
+                          << tensor->name << " (external: " << location << ")\n";
+            }
         }
 
         // Add it to our Graph's memory

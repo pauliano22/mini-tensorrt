@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm> // for std::max_element
+#include <cstdlib>   // for std::getenv
 
 // Define the stb_image implementation before including it
 #define STB_IMAGE_IMPLEMENTATION
@@ -30,8 +31,13 @@ int main(int argc, char** argv) {
     std::shared_ptr<minitrt::Graph> my_graph = parser.parse();
 
     // 2. MIDDLE-END: Run Graph Optimization (Operator Fusion)
+    // Set MINITRT_NO_FUSION=1 to benchmark the unfused Conv -> ReLU baseline.
     minitrt::Optimizer optimizer;
-    optimizer.run_passes(my_graph);
+    if (std::getenv("MINITRT_NO_FUSION")) {
+        std::cout << "[Optimizer] Fusion disabled (MINITRT_NO_FUSION is set).\n";
+    } else {
+        optimizer.run_passes(my_graph);
+    }
 
     // 3. BACKEND: Load the REAL image into memory
     int width, height, channels;

@@ -45,3 +45,4 @@ __pycache__/
 models/*.onnx
 # Keep the demo model used by the README walkthrough
 !models/mnist_cnn.onnx
+scripts/mnist_data/
