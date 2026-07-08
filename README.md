@@ -6,6 +6,8 @@ Mini-TensorRT is an optimizing deep learning inference engine written from scrat
 
 The bundled demo model is a small CNN trained to **93.2% accuracy on MNIST** — the engine genuinely recognizes handwritten digits, and its outputs **match ONNX Runtime's logits exactly** on the same inputs.
 
+**[Try it in your browser](https://pauliacobucci.com/demo.html)** — the same kernels compiled to WebAssembly, classifying digits you draw (see `wasm/`).
+
 ![Computational Graph Overview](images/netron_graph.png)
 *Visualizing the ingested ONNX topology prior to operator fusion.*
 
