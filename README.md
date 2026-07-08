@@ -1,5 +1,7 @@
 # Mini-TensorRT
 
+![build](https://github.com/pauliano22/mini-tensorrt/actions/workflows/ci.yml/badge.svg)
+
 Mini-TensorRT is an optimizing deep learning inference engine written from scratch in C++. It serves as a custom inference compiler designed to explore the intersection of machine learning systems and hardware-software co-design. The engine ingests standard ONNX models, constructs a custom Intermediate Representation (IR) graph, applies middle-end compiler optimizations, and executes operations via a backend of handwritten C++ kernels.
 
 The bundled demo model is a small CNN trained to **93.2% accuracy on MNIST** — the engine genuinely recognizes handwritten digits, and its outputs **match ONNX Runtime's logits exactly** on the same inputs.

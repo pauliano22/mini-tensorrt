@@ -1,0 +1,41 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake protobuf-compiler libprotobuf-dev
+
+      # Regenerate the protobuf bindings with the CI toolchain so the
+      # generated code always matches the installed libprotobuf version.
+      - name: Regenerate ONNX protobuf bindings
+        run: |
+          protoc -I proto --cpp_out=. proto/onnx.proto
+          mv onnx.pb.cc src/onnx.pb.cc
+          mv onnx.pb.h include/onnx.pb.h
+
+      - name: Build
+        run: |
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          make
+
+      - name: End-to-end inference test
+        run: |
+          cd build
+          status=0
+          for pair in one:1 three:3 seven:7; do
+            img="test_${pair%%:*}.png"; want="${pair##*:}"
+            got=$(./mini_tensorrt ../models/mnist_cnn.onnx "../models/$img" | grep -oP 'The digit is \K[0-9]')
+            echo "$img -> predicted $got (expected $want)"
+            [ "$got" = "$want" ] || status=1
+          done
+          exit $status
