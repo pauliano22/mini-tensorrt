@@ -43,3 +43,5 @@ cmake-build-release/
 __pycache__/
 *.pyc
 models/*.onnx
+# Keep the demo model used by the README walkthrough
+!models/mnist_cnn.onnx
